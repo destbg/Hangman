@@ -31,8 +31,15 @@ namespace Hangman {
                     else {
                         char[] wordCheck = read[1].ToCharArray();
                         length = wordCheck.Length;
-                        startA = wordCheck[0] - 100;
-                        endA = wordCheck[0] + 100;
+                        bool sA = true, eA = true;
+                        for (int i = wordCheck[0], x = wordCheck[0]; sA || eA; i++, x--) {
+                            if (char.IsLetter((char)i) && eA)
+                                endA = i;
+                            else eA = false;
+                            if (char.IsLetter((char)x) && sA)
+                                startA = x;
+                            else sA = false;
+                        }
                         word = new Letters[length];
                         for (int i = 0; i < length; i++)
                             word[i] = new Letters(wordCheck[i],
@@ -42,6 +49,15 @@ namespace Hangman {
                 else if (read[0] == "random" && read.Length == 1) {
                     char[] wordCheck = GetRandomWord();
                     length = wordCheck.Length;
+                    bool sA = true, eA = true;
+                    for (int i = wordCheck[0], x = wordCheck[0]; sA || eA; i++, x--) {
+                        if (char.IsLetter((char)i) && eA)
+                            endA = i;
+                        else eA = false;
+                        if (char.IsLetter((char)x) && sA)
+                            startA = x;
+                        else sA = false;
+                    }
                     word = new Letters[length];
                     for (int i = 0; i < length; i++)
                         word[i] = new Letters(wordCheck[i],
@@ -70,7 +86,7 @@ namespace Hangman {
                         command = "Input has to be a letter!";
                         dontAdd = true;
                     }
-                    else if (letter < startA && letter > endA) {
+                    else if (letter < startA || letter > endA) {
                         command = "Input has the be from the same language as the word.";
                         dontAdd = true;
                     }
