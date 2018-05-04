@@ -49,15 +49,8 @@ namespace Hangman {
                 else if (read[0] == "random" && read.Length == 1) {
                     char[] wordCheck = GetRandomWord();
                     length = wordCheck.Length;
-                    bool sA = true, eA = true;
-                    for (int i = wordCheck[0], x = wordCheck[0]; sA || eA; i++, x--) {
-                        if (char.IsLetter((char)i) && eA)
-                            endA = i;
-                        else eA = false;
-                        if (char.IsLetter((char)x) && sA)
-                            startA = x;
-                        else sA = false;
-                    }
+                    startA = 97;
+                    endA = 122;
                     word = new Letters[length];
                     for (int i = 0; i < length; i++)
                         word[i] = new Letters(wordCheck[i],
