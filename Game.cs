@@ -40,6 +40,9 @@ namespace Hangman {
                                 startA = x;
                             else sA = false;
                         }
+                        for (int i = 0; i < wordCheck.Length; i++)
+                            if (wordCheck[i] < startA || wordCheck[i] > endA)
+                                return;
                         word = new Letters[length];
                         for (int i = 0; i < length; i++)
                             word[i] = new Letters(wordCheck[i],
