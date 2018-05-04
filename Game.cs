@@ -4,10 +4,6 @@ using static System.Console;
 
 namespace Hangman {
     class Game {
-        static void Main() {
-            Title = "Hangman";
-            while (true) new Game();
-        }
         public Game() {
             Letters[] word;
             int length, startA = 0, endA = int.MaxValue;
@@ -40,9 +36,16 @@ namespace Hangman {
                                 startA = x;
                             else sA = false;
                         }
+                        bool error = false;
                         for (int i = 0; i < wordCheck.Length; i++)
-                            if (wordCheck[i] < startA || wordCheck[i] > endA)
-                                return;
+                            if (wordCheck[i] < startA || wordCheck[i] > endA) {
+                                error = true;
+                                break;
+                            }
+                        if (error) {
+                            WriteLine("An error accured while trying to start the game.\n");
+                            continue;
+                        }
                         word = new Letters[length];
                         for (int i = 0; i < length; i++)
                             word[i] = new Letters(wordCheck[i],
@@ -67,7 +70,7 @@ namespace Hangman {
             var alphabet = new HashSet<char>();
             string input = "meme";
             byte frame = 0;
-            while (true) {
+            while (input != "exit") {
                 string toSay = "\n", command = "Input has to be one letter!";
                 char letter;
                 bool finished = false, used = false, dontAdd = false;
