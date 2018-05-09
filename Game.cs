@@ -9,7 +9,8 @@ namespace Hangman {
             int length, startA = 0, endA = int.MaxValue;
             #region start
             Clear();
-            WriteLine("Use one of the following commands.\n" +
+            WriteLine("Welcome to Hangman in C# console by destbg.\n" +
+                "Use one of the following commands.\n" +
                 "is <word> - to start the game with that word.\n" +
                 "random - so the game chooses a word for you.\n");
             while (true) {
@@ -98,7 +99,7 @@ namespace Hangman {
                 toSay += "Word: ";
                 for (int i = 0; i < length; i++) {
                     if (word[i].Letter == letter && !word[i].Perms) {
-                        word[i].Perms = true;
+                        word[i] = new Letters(word[i].Letter, true);
                         where.Add((byte)(i + 1));
                     }
                     if (!word[i].Perms) finished = true;

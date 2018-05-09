@@ -1,12 +1,10 @@
 ﻿namespace Hangman {
     public class Letters {
-        private char letter;
-        public bool Perms { get; set; }
-        public char Letter {
-            get => letter;
-        }
+        public bool Perms { get; }
+        public char Letter { get; }
+
         public Letters(char letter, bool perms) {
-            this.letter = letter;
+            Letter = letter;
             Perms = perms;
         }
     }
